@@ -31,6 +31,13 @@ def plot_graphics(data: list[TimeMoments], function: Callable):
 
     axis["right"].plot(y[:, 0], y[:, 1])
     axis["right"].set_title("Path")
+    coordinates = [moment.characteristics.b for moment in data]
+    coordinates_x = [coordinate[0] for coordinate in coordinates]
+    coordinates_y = [coordinate[1] for coordinate in coordinates]
+    axis["right"].scatter(coordinates_x, coordinates_y)
+    for coordinate_x, coordinate_y in zip(coordinates_x, coordinates_y):
+        text = f"({coordinate_x},{coordinate_y})"
+        axis["right"].text(coordinate_x - 0.06, coordinate_y + 0.05, text, weight="bold")
 
     plt.gcf().canvas.set_window_title("Graphics")
     plt.show()
